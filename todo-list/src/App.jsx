@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TodoItem } from "./TodoItem";
 import "./App.css";
+import React from "react";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -22,7 +23,7 @@ function App() {
     setTodoName("");
   }
   const list = todos.map((todo) => (
-    <TodoItem item={todo} setTodos={setTodos} todos={todos} />
+    <TodoItem item={todo} setTodos={setTodos} todos={todos} key={todo.id} />
   ));
   return (
     <div className="app">

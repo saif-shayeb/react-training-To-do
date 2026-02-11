@@ -22,7 +22,7 @@ table {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 table tr {
-  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 20%);
 }
 table tr:hover {
   background-color: hsl(0, 0%, 15%);

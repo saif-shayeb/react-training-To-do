@@ -1,8 +1,9 @@
 import { MdOutlineCancel } from "react-icons/md";
 import "./App.css";
 import { useState } from "react";
+import React from "react";
 
-export function TodoItem({ item, setTodos, todos }) {
+export function TodoItem({ item, setTodos, todos, key }) {
   const [flag, setFlag] = useState(false);
 
   function handleCheckboxClick() {
@@ -32,7 +33,7 @@ export function TodoItem({ item, setTodos, todos }) {
         </p>
       </td>
       <td className="delete">
-        <button onClick={handleDelete}>
+        <button aria-label={`delete ${item.name}`} onClick={handleDelete}>
           <MdOutlineCancel />
         </button>
       </td>
