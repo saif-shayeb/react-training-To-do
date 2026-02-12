@@ -2,29 +2,42 @@ import { useState } from "react";
 import { TodoItem } from "./TodoItem";
 import "./App.css";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, name: "first todo", done: false },
-    { id: 2, name: "second todo", done: false },
-    { id: 3, name: "third todo", done: false },
+    { id: uuidv4(), name: "first todo", done: false },
+    { id: uuidv4(), name: "second todo", done: false },
+    { id: uuidv4(), name: "third todo", done: false },
   ]);
+
   const [todoName, setTodoName] = useState("");
+  const [filter, setFilter] = useState("all");
+
   function handleAdd() {
-    if (todoName.trim() === "") {
-      return;
-    }
+    if (todoName.trim() === "") return;
+
     const newTodo = {
-      id: todos.length + 1,
+      id: uuidv4(),
       name: todoName,
       done: false,
     };
+
     setTodos([...todos, newTodo]);
     setTodoName("");
   }
-  const list = todos.map((todo) => (
+
+  // derive filtered todos instead of mutating state
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.done;
+    if (filter === "completed") return todo.done;
+    return true;
+  });
+
+  const list = filteredTodos.map((todo) => (
     <TodoItem item={todo} setTodos={setTodos} todos={todos} key={todo.id} />
   ));
+
   return (
     <div className="app">
       <div className="inputdiv">
@@ -36,6 +49,36 @@ function App() {
         />
         <button onClick={handleAdd}>add</button>
       </div>
+
+      <nav className="filterdiv">
+        <input
+          type="radio"
+          name="filter"
+          id="all"
+          checked={filter === "all"}
+          onChange={() => setFilter("all")}
+        />
+        <label htmlFor="all">All</label>
+
+        <input
+          type="radio"
+          name="filter"
+          id="active"
+          checked={filter === "active"}
+          onChange={() => setFilter("active")}
+        />
+        <label htmlFor="active">Active</label>
+
+        <input
+          type="radio"
+          name="filter"
+          id="completed"
+          checked={filter === "completed"}
+          onChange={() => setFilter("completed")}
+        />
+        <label htmlFor="completed">Completed</label>
+      </nav>
+
       <table>
         <tbody>{list}</tbody>
       </table>

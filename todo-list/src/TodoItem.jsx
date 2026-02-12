@@ -3,28 +3,34 @@ import "./App.css";
 import { useState } from "react";
 import React from "react";
 
-export function TodoItem({ item, setTodos, todos, key }) {
-  const [flag, setFlag] = useState(false);
-
+export function TodoItem({ item, setTodos, todos }) {
   function handleCheckboxClick() {
-    setFlag(!flag);
+    setTodos(
+      todos.map((todo) =>
+        todo.id === item.id ? { ...todo, done: !todo.done } : todo,
+      ),
+    );
   }
 
   function handleDelete() {
-    setTodos(todos.filter((todo) => todo.id !== item.id));
+    setTodos(todos.filter((todo) => todo.key !== item.key));
   }
   return (
     <tr className="todoItem">
       <td className="checkboxdiv">
         <label className="checkbox">
-          <input type="checkbox" onClick={handleCheckboxClick} />
+          <input
+            type="checkbox"
+            onClick={handleCheckboxClick}
+            checked={item.done}
+          />
           <span className="checkmark"></span>
         </label>
       </td>
       <td className="name">
         <p
           style={
-            flag
+            item.done
               ? { textDecoration: "line-through" }
               : { textDecoration: "none" }
           }

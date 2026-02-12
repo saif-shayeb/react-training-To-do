@@ -105,7 +105,7 @@ table tr:hover {
 }
 .inputdiv button {
   background-color: #62ef21;
-  border: none;
+  border: 2px solid transparent;
   padding: 0.8rem 1.2rem;
   border-radius: 30px;
   font-size: 1.2rem;
@@ -113,5 +113,44 @@ table tr:hover {
   color: #323232;
 }
 .inputdiv button:hover {
-  background-color: #7fff64;
+  background-color: #323232;
+  color: #62ef21;
+  transition: all 0.3s ease;
+  border: #62ef21 solid 2px;
+}
+.inputdiv button:active {
+  background-color: #62ef21;
+  color: #323232;
+  transition: all 0.1s ease-in;
+}
+nav {
+  width: 60%;
+  border: 2px solid #323232;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  background-color: #323232;
+}
+nav input {
+  display: none;
+}
+nav label {
+  font-family: sans-serif;
+  padding: 10px 16px;
+  border: 2px solid #62ef21;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 30px;
+  margin-right: 10px;
+  width: 80px;
+  text-align: center;
+}
+
+nav label:hover {
+  background: #4f4f4f;
+}
+nav input:checked + label {
+  background: #62ef21;
 }
