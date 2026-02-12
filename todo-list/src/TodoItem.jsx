@@ -13,7 +13,7 @@ export function TodoItem({ item, setTodos, todos }) {
   }
 
   function handleDelete() {
-    setTodos(todos.filter((todo) => todo.key !== item.key));
+    setTodos(todos.filter((todo) => todo.id !== item.id));
   }
   return (
     <tr className="todoItem">
